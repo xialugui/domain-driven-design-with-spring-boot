@@ -1,12 +1,13 @@
 package com.lugew.springbootddd.snackmachine;
 
 import com.lugew.springbootddd.ValueObject;
+import lombok.Getter;
 
 /**
  * @author 夏露桂
  * @since 2021/6/7 11:59
  */
-
+@Getter
 public class Money extends ValueObject<Money> {
     private final int oneCentCount;
     private final int tenCentCount;
@@ -14,6 +15,13 @@ public class Money extends ValueObject<Money> {
     private final int oneDollarCount;
     private final int fiveDollarCount;
     private final int twentyDollarCount;
+    private float amount;
+
+    public float getAmount() {
+        return oneCentCount * 0.01f + tenCentCount * 0.10f + quarterCount * 0.25f +
+                oneDollarCount * 1f
+                + fiveDollarCount * 5f + twentyDollarCount * 20f;
+    }
 
     public Money(int oneCentCount, int tenCentCount, int quarterCount, int
             oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
@@ -36,6 +44,16 @@ public class Money extends ValueObject<Money> {
         this.oneDollarCount = oneDollarCount;
         this.fiveDollarCount = fiveDollarCount;
         this.twentyDollarCount = twentyDollarCount;
+    }
+
+    public Money substract(Money other) {
+        return new Money(
+                oneCentCount - other.oneCentCount,
+                tenCentCount - other.tenCentCount,
+                quarterCount - other.quarterCount,
+                oneDollarCount - other.oneDollarCount,
+                fiveDollarCount - other.fiveDollarCount,
+                twentyDollarCount - other.twentyDollarCount);
     }
 
     public static Money add(Money money1, Money money2) {
