@@ -17,6 +17,19 @@ public class Money extends ValueObject<Money> {
 
     public Money(int oneCentCount, int tenCentCount, int quarterCount, int
             oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
+        if (oneCentCount < 0)
+            throw new IllegalStateException();
+        if (tenCentCount < 0)
+            throw new IllegalStateException();
+        if (quarterCount < 0)
+            throw new IllegalStateException();
+        if (oneDollarCount < 0)
+            throw new IllegalStateException();
+        if (fiveDollarCount < 0)
+            throw new IllegalStateException();
+        if (twentyDollarCount < 0)
+            throw new IllegalStateException();
+
         this.oneCentCount = oneCentCount;
         this.tenCentCount = tenCentCount;
         this.quarterCount = quarterCount;
@@ -26,6 +39,7 @@ public class Money extends ValueObject<Money> {
     }
 
     public static Money add(Money money1, Money money2) {
+
         return new Money(
                 money1.oneCentCount + money2.oneCentCount,
                 money1.tenCentCount + money2.tenCentCount,
