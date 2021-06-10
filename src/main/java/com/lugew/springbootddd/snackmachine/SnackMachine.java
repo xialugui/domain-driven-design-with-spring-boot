@@ -1,6 +1,7 @@
 package com.lugew.springbootddd.snackmachine;
 
 import com.lugew.springbootddd.Entity;
+import com.lugew.springbootddd.SnackMachineDto;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -38,4 +39,13 @@ public final class SnackMachine extends Entity {
         moneyInside = Money.add(moneyInside, moneyInTransaction);
         moneyInTransaction = None;
     }
+
+    public SnackMachineDto convertToSnackMachineDto() {
+        SnackMachineDto snackMachineDto = new SnackMachineDto();
+        snackMachineDto.setId(getId());
+        snackMachineDto.setMoneyInside(getMoneyInside());
+        snackMachineDto.setMoneyInTransaction(getMoneyInTransaction());
+        return snackMachineDto;
+    }
+
 }

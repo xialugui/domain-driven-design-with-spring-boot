@@ -1,12 +1,13 @@
 package com.lugew.springbootddd.snackmachine;
 
 import com.lugew.springbootddd.ValueObject;
+import lombok.Getter;
 
 /**
  * @author 夏露桂
  * @since 2021/6/7 11:59
  */
-
+@Getter
 public class Money extends ValueObject<Money> {
 
     public static Money None = new Money(0, 0, 0, 0, 0, 0);
