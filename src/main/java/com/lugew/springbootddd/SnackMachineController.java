@@ -1,5 +1,6 @@
 package com.lugew.springbootddd;
 
+import com.lugew.springbootddd.snackmachine.Money;
 import com.lugew.springbootddd.snackmachine.SnackMachine;
 import org.springframework.web.bind.annotation.*;
 
@@ -44,4 +45,9 @@ public class SnackMachineController {
             int slotNumber) {
         snackMachine.buySnack();
     }
+
+    public Money getWholeMoney(SnackMachine snackMachine) {
+        return Money.add(snackMachine.getMoneyInside(), snackMachine.getMoneyInTransaction());
+    }
+
 }

@@ -96,4 +96,11 @@ public class Money extends ValueObject<Money> {
         hashCode = (hashCode * 397) ^ twentyDollarCount;
         return hashCode;
     }
+
+    @Override
+    public String toString() {
+        if (getAmount() < 1)
+            return "¢" + getAmount() * 100;
+        return "$" + getAmount();
+    }
 }
