@@ -1,8 +1,11 @@
 package com.lugew.springbootddd;
 
-import com.lugew.springbootddd.snackmachine.Money;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 
 /**
  * @author 夏露桂
@@ -10,8 +13,17 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Entity
 public class SnackMachineDto {
-    private Money moneyInside;
-    private Money moneyInTransaction;
+    @Id
+    @GeneratedValue
     private long id;
+    private int oneCentCount;
+    private int tenCentCount;
+    private int quarterCount;
+    private int oneDollarCount;
+    private int fiveDollarCount;
+    private int twentyDollarCount;
+    private float moneyInTransaction;
+
 }
