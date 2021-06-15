@@ -5,12 +5,12 @@ function getSnackMachine() {
     $.get(rootURI, function (data, status) {
         console.log(data)
         $('#moneyInserted').html(data.moneyInTransaction);
-        $('#cent').html(data.moneyInside.oneCentCount);
-        $('#tenCent').html(data.moneyInside.tenCentCount);
-        $('#quarter').html(data.moneyInside.quarterCount);
-        $('#dollar').html(data.moneyInside.oneDollarCount);
-        $('#fiveDollar').html(data.moneyInside.fiveDollarCount);
-        $('#twentyDollar').html(data.moneyInside.twentyDollarCount);
+        $('#cent').html(data.oneCentCount);
+        $('#tenCent').html(data.tenCentCount);
+        $('#quarter').html(data.quarterCount);
+        $('#dollar').html(data.oneDollarCount);
+        $('#fiveDollar').html(data.fiveDollarCount);
+        $('#twentyDollar').html(data.twentyDollarCount);
     });
 }
 
