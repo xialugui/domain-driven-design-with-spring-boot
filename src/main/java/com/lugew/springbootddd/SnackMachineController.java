@@ -2,6 +2,7 @@ package com.lugew.springbootddd;
 
 import com.lugew.springbootddd.snackmachine.Money;
 import com.lugew.springbootddd.snackmachine.SnackMachine;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import static com.lugew.springbootddd.snackmachine.Money.*;
@@ -12,16 +13,31 @@ import static com.lugew.springbootddd.snackmachine.Money.*;
  */
 @RestController
 @RequestMapping("snackmachines")
+@RequiredArgsConstructor
 public class SnackMachineController {
-    static SnackMachine snackMachine = new SnackMachine();
+    private final SnackMachineRepository snackMachineRepository;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
+    @ResponseBody
     public SnackMachineDto getSnackMachine(@PathVariable("id") long id) {
-        return snackMachine.convertToSnackMachineDto();
+        return snackMachineRepository.findById(id).orElse(null);
     }
 
-    @PutMapping("{id}/moneyInTransaction/{coinOrNote}")
+    @PutMapping("/{id}/{slotNumber}")
+    public void buySnack(@PathVariable("id") long id, @PathVariable("slotNumber")
+            int slotNumber) {
+        SnackMachineDto snackMachineDto =
+                snackMachineRepository.findById(id).orElse(null);
+        SnackMachine snackMachine = snackMachineDto.convertToSnackMachine();
+        snackMachine.buySnack();
+        snackMachineRepository.save(snackMachine.convertToSnackMachineDto());
+    }
+
+    @PutMapping("/{id}/moneyInTransaction/{coinOrNote}")
     public void insertCoinOrNote(@PathVariable("id") long id, @PathVariable("coinOrNote") String coinOrNote) {
+        SnackMachineDto snackMachineDto =
+                snackMachineRepository.findById(id).orElse(null);
+        SnackMachine snackMachine = snackMachineDto.convertToSnackMachine();
         if (coinOrNote.equalsIgnoreCase("Cent")) snackMachine.insertMoney(Cent);
         else if (coinOrNote.equalsIgnoreCase("TenCent"))
             snackMachine.insertMoney(TenCent);
@@ -33,17 +49,16 @@ public class SnackMachineController {
             snackMachine.insertMoney(FiveDollar);
         else if (coinOrNote.equalsIgnoreCase("TwentyDollar"))
             snackMachine.insertMoney(TwentyDollar);
+        snackMachineRepository.save(snackMachine.convertToSnackMachineDto());
     }
 
     @PutMapping("/{id}/moneyInTransaction")
     public void returnMoney(@PathVariable("id") long id) {
+        SnackMachineDto snackMachineDto =
+                snackMachineRepository.findById(id).orElse(null);
+        SnackMachine snackMachine = snackMachineDto.convertToSnackMachine();
         snackMachine.returnMoney();
-    }
-
-    @PutMapping("/{id}/{slotNumber}")
-    public void buySnack(@PathVariable("id") long id, @PathVariable("slotNumber")
-            int slotNumber) {
-        snackMachine.buySnack();
+        snackMachineRepository.save(snackMachine.convertToSnackMachineDto());
     }
 
     public Money getWholeMoney(SnackMachine snackMachine) {

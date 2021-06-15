@@ -4,7 +4,7 @@ getSnackMachine();
 function getSnackMachine() {
     $.get(rootURI, function (data, status) {
         console.log(data)
-        $('#moneyInserted').html(data.moneyInTransaction.amount);
+        $('#moneyInserted').html(data.moneyInTransaction);
         $('#cent').html(data.moneyInside.oneCentCount);
         $('#tenCent').html(data.moneyInside.tenCentCount);
         $('#quarter').html(data.moneyInside.quarterCount);

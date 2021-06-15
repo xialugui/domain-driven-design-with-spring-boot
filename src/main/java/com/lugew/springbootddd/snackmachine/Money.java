@@ -55,6 +55,15 @@ public class Money extends ValueObject<Money> {
         this.twentyDollarCount = twentyDollarCount;
     }
 
+    public Money(float amount, int oneCentCount, int tenCentCount, int quarterCount, int
+            oneDollarCount, int fiveDollarCount, int twentyDollarCount) {
+        this(oneCentCount, tenCentCount, quarterCount, oneDollarCount, fiveDollarCount, twentyDollarCount);
+        if (amount < 0) {
+            throw new IllegalStateException();
+        }
+        this.amount = amount;
+    }
+
     public Money substract(Money other) {
         return new Money(
                 oneCentCount - other.oneCentCount,
