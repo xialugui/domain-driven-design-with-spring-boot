@@ -51,7 +51,8 @@ public class SnackMachineTest {
         assertEquals(snackMachine.getMoneyInside().getAmount(), 1, 0.5);
         Slot slot = snackMachine.getSlots().stream().filter(x -> x.getPosition() ==
                 1).findAny().orElse(null);
-        assertEquals(slot.getQuantity(), 9);
+        assertEquals(slot.
+                getQuantity(), 9);
     }
 
 
