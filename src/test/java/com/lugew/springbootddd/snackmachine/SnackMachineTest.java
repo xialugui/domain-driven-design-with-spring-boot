@@ -1,8 +1,11 @@
 package com.lugew.springbootddd.snackmachine;
 
+import com.lugew.springbootddd.Slot;
+import com.lugew.springbootddd.Snack;
 import org.junit.jupiter.api.Test;
 
-import static com.lugew.springbootddd.snackmachine.Money.*;
+import static com.lugew.springbootddd.snackmachine.Money.Cent;
+import static com.lugew.springbootddd.snackmachine.Money.Dollar;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -38,13 +41,18 @@ public class SnackMachineTest {
     }
 
     @Test
-    public void money_in_transaction_goes_to_money_inside_after_purchase() {
+    public void buySnack_trades_inserted_money_for_a_snack() {
         SnackMachine snackMachine = new SnackMachine();
+        snackMachine.loadSnacks(1, new Snack("Some snack"), 10, 1);
         snackMachine.insertMoney(Dollar);
-        snackMachine.insertMoney(Dollar);
-        snackMachine.buySnack();
-        assertEquals(snackMachine.getMoneyInTransaction(), None);
-        assertEquals(snackMachine.getMoneyInside().getAmount(), 2, 0);
+        snackMachine.buySnack(1);
+        assertEquals(snackMachine.getMoneyInTransaction().getAmount(),
+                0);
+        assertEquals(snackMachine.getMoneyInside().getAmount(), 1, 0.5);
+        Slot slot = snackMachine.getSlots().stream().filter(x -> x.getPosition() ==
+                1).findAny().orElse(null);
+        assertEquals(slot.getQuantity(), 9);
     }
+
 
 }

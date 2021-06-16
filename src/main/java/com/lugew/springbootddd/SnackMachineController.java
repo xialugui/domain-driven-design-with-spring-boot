@@ -29,7 +29,7 @@ public class SnackMachineController {
         SnackMachineDto snackMachineDto =
                 snackMachineRepository.findById(id).orElse(null);
         SnackMachine snackMachine = snackMachineDto.convertToSnackMachine();
-        snackMachine.buySnack();
+        snackMachine.buySnack(slotNumber);
         snackMachineRepository.save(snackMachine.convertToSnackMachineDto());
     }
 

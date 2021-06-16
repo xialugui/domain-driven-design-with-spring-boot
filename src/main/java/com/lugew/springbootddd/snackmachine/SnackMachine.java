@@ -1,11 +1,15 @@
 package com.lugew.springbootddd.snackmachine;
 
 import com.lugew.springbootddd.Entity;
+import com.lugew.springbootddd.Slot;
+import com.lugew.springbootddd.Snack;
 import com.lugew.springbootddd.SnackMachineDto;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static com.lugew.springbootddd.snackmachine.Money.None;
 
@@ -14,10 +18,15 @@ import static com.lugew.springbootddd.snackmachine.Money.None;
 public final class SnackMachine extends Entity {
     private Money moneyInside;
     private Money moneyInTransaction;
+    private List<Slot> slots;
 
     public SnackMachine() {
         moneyInside = None;
         moneyInTransaction = None;
+        slots = new ArrayList<>();
+        slots.add(new Slot(this, 1, null, 0, 1));
+        slots.add(new Slot(this, 2, null, 0, 1));
+        slots.add(new Slot(this, 3, null, 0, 1));
     }
 
     public void insertMoney(Money money) {
@@ -35,7 +44,11 @@ public final class SnackMachine extends Entity {
         moneyInTransaction = None;
     }
 
-    public void buySnack() {
+
+    public void buySnack(int position) {
+        Slot slot = slots.stream().filter(x -> x.getPosition() ==
+                position).findAny().orElse(null);
+        slot.setQuantity(slot.getQuantity() - 1);
         moneyInside = Money.add(moneyInside, moneyInTransaction);
         moneyInTransaction = None;
     }
@@ -53,4 +66,13 @@ public final class SnackMachine extends Entity {
         return snackMachineDto;
     }
 
+    public void loadSnacks(int position, Snack snack, int quantity, float price) {
+        Slot slot = slots.stream().filter(x -> x.getPosition() ==
+                position).findAny().orElse(null);
+        if (slot != null) {
+            slot.setSnack(snack);
+            slot.setQuantity(quantity);
+            slot.setPrice(price);
+        }
+    }
 }
