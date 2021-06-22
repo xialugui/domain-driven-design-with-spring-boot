@@ -1,6 +1,6 @@
 package com.lugew.springbootddd.snackmachine;
 
-import com.lugew.springbootddd.Entity;
+import com.lugew.springbootddd.AggregateRoot;
 import com.lugew.springbootddd.Slot;
 import com.lugew.springbootddd.Snack;
 import com.lugew.springbootddd.SnackMachineDto;
@@ -15,7 +15,7 @@ import static com.lugew.springbootddd.snackmachine.Money.None;
 
 @Getter
 @Setter
-public final class SnackMachine extends Entity {
+public final class SnackMachine extends AggregateRoot {
     private Money moneyInside;
     private Money moneyInTransaction;
     private List<Slot> slots;
