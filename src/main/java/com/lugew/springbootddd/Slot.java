@@ -11,21 +11,40 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Slot extends Entity {
-    private Snack snack;
-    private int quantity;
-    private float price;
+    private SnackPile snackPile;
     private SnackMachine snackMachine;
     private int position;
 
     public Slot() {
     }
 
-    public Slot(SnackMachine snackMachine, int position, Snack snack, int quantity,
-                float price) {
+    public Slot(SnackMachine snackMachine, int position) {
         this.snackMachine = snackMachine;
         this.position = position;
-        this.snack = snack;
-        this.quantity = quantity;
-        this.price = price;
+        this.snackPile = new SnackPile(null, 0, 0);
+    }
+
+    public SnackPile getSnackPile() {
+        return snackPile;
+    }
+
+    public void setSnackPile(SnackPile snackPile) {
+        this.snackPile = snackPile;
+    }
+
+    public SnackMachine getSnackMachine() {
+        return snackMachine;
+    }
+
+    public void setSnackMachine(SnackMachine snackMachine) {
+        this.snackMachine = snackMachine;
+    }
+
+    public int getPosition() {
+        return position;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
     }
 }

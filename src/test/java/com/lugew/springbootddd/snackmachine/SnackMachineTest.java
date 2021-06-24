@@ -1,7 +1,7 @@
 package com.lugew.springbootddd.snackmachine;
 
-import com.lugew.springbootddd.Slot;
 import com.lugew.springbootddd.Snack;
+import com.lugew.springbootddd.SnackPile;
 import org.junit.jupiter.api.Test;
 
 import static com.lugew.springbootddd.snackmachine.Money.Cent;
@@ -42,17 +42,15 @@ public class SnackMachineTest {
 
     @Test
     public void buySnack_trades_inserted_money_for_a_snack() {
+
         SnackMachine snackMachine = new SnackMachine();
-        snackMachine.loadSnacks(1, new Snack("Some snack"), 10, 1);
+
+        snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 10, 1));
         snackMachine.insertMoney(Dollar);
         snackMachine.buySnack(1);
-        assertEquals(snackMachine.getMoneyInTransaction().getAmount(),
-                0);
+        assertEquals(snackMachine.getMoneyInTransaction(), Money.None);
         assertEquals(snackMachine.getMoneyInside().getAmount(), 1, 0.5);
-        Slot slot = snackMachine.getSlots().stream().filter(x -> x.getPosition() ==
-                1).findAny().orElse(null);
-        assertEquals(slot.
-                getQuantity(), 9);
+        assertEquals(snackMachine.getSnackPile(1).getQuantity(), 9);
     }
 
 

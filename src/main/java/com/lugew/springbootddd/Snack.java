@@ -9,7 +9,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class Snack extends Entity {
+public class Snack extends AggregateRoot {
     private String name;
 
     public Snack() {

@@ -2,8 +2,8 @@ package com.lugew.springbootddd.snackmachine;
 
 import com.lugew.springbootddd.AggregateRoot;
 import com.lugew.springbootddd.Slot;
-import com.lugew.springbootddd.Snack;
 import com.lugew.springbootddd.SnackMachineDto;
+import com.lugew.springbootddd.SnackPile;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,20 +13,34 @@ import java.util.List;
 
 import static com.lugew.springbootddd.snackmachine.Money.None;
 
-@Getter
-@Setter
+
 public final class SnackMachine extends AggregateRoot {
+
+    @Getter
+    @Setter
     private Money moneyInside;
+    @Getter
+    @Setter
     private Money moneyInTransaction;
+
     private List<Slot> slots;
 
     public SnackMachine() {
         moneyInside = None;
         moneyInTransaction = None;
         slots = new ArrayList<>();
-        slots.add(new Slot(this, 1, null, 0, 1));
-        slots.add(new Slot(this, 2, null, 0, 1));
-        slots.add(new Slot(this, 3, null, 0, 1));
+        slots.add(new Slot(this, 1));
+        slots.add(new Slot(this, 2));
+        slots.add(new Slot(this, 3));
+    }
+
+    public Slot getSlot(int position) {
+        return slots.stream().filter(x -> x.getPosition() ==
+                position).findAny().orElse(null);
+    }
+
+    public SnackPile getSnackPile(int position) {
+        return getSlot(position).getSnackPile();
     }
 
     public void insertMoney(Money money) {
@@ -46,9 +60,8 @@ public final class SnackMachine extends AggregateRoot {
 
 
     public void buySnack(int position) {
-        Slot slot = slots.stream().filter(x -> x.getPosition() ==
-                position).findAny().orElse(null);
-        slot.setQuantity(slot.getQuantity() - 1);
+        Slot slot = getSlot(position);
+        slot.setSnackPile(slot.getSnackPile().subtractOne());
         moneyInside = Money.add(moneyInside, moneyInTransaction);
         moneyInTransaction = None;
     }
@@ -66,13 +79,11 @@ public final class SnackMachine extends AggregateRoot {
         return snackMachineDto;
     }
 
-    public void loadSnacks(int position, Snack snack, int quantity, float price) {
+    public void loadSnacks(int position, SnackPile snackPile) {
         Slot slot = slots.stream().filter(x -> x.getPosition() ==
                 position).findAny().orElse(null);
         if (slot != null) {
-            slot.setSnack(snack);
-            slot.setQuantity(quantity);
-            slot.setPrice(price);
+            slot.setSnackPile(snackPile);
         }
     }
 }
