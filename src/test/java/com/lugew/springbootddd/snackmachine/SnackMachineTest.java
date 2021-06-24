@@ -53,5 +53,23 @@ public class SnackMachineTest {
         assertEquals(snackMachine.getSnackPile(1).getQuantity(), 9);
     }
 
+    @Test
+    public void cannot_make_purchase_when_there_is_no_snacks() {
+        SnackMachine snackMachine = new SnackMachine();
+        assertThrows(IllegalStateException.class, () -> {
+            snackMachine.buySnack(1);
+        });
+    }
+
+    @Test
+    public void cannot_make_purchase_if_not_enough_money_inserted() {
+        SnackMachine snackMachine = new SnackMachine();
+        snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 1, 2));
+        snackMachine.insertMoney(Dollar);
+        assertThrows(IllegalStateException.class, () -> {
+            snackMachine.buySnack(1);
+        });
+
+    }
 
 }

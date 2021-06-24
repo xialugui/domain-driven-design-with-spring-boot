@@ -61,6 +61,9 @@ public final class SnackMachine extends AggregateRoot {
 
     public void buySnack(int position) {
         Slot slot = getSlot(position);
+        if (slot.getSnackPile().getPrice() > moneyInTransaction.getAmount()) {
+            throw new IllegalStateException();
+        }
         slot.setSnackPile(slot.getSnackPile().subtractOne());
         moneyInside = Money.add(moneyInside, moneyInTransaction);
         moneyInTransaction = None;
@@ -86,4 +89,6 @@ public final class SnackMachine extends AggregateRoot {
             slot.setSnackPile(snackPile);
         }
     }
+
+
 }
