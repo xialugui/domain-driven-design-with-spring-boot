@@ -4,8 +4,7 @@ import com.lugew.springbootddd.Snack;
 import com.lugew.springbootddd.SnackPile;
 import org.junit.jupiter.api.Test;
 
-import static com.lugew.springbootddd.snackmachine.Money.Cent;
-import static com.lugew.springbootddd.snackmachine.Money.Dollar;
+import static com.lugew.springbootddd.snackmachine.Money.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -20,7 +19,7 @@ public class SnackMachineTest {
         SnackMachine snackMachine = new SnackMachine();
         snackMachine.insertMoney(Dollar);
         snackMachine.returnMoney();
-        assertEquals(snackMachine.getMoneyInTransaction().getAmount(), 0, 0);
+        assertEquals(snackMachine.getMoneyInTransaction(), 0, 0);
     }
 
     @Test
@@ -28,7 +27,7 @@ public class SnackMachineTest {
         SnackMachine snackMachine = new SnackMachine();
         snackMachine.insertMoney(Cent);
         snackMachine.insertMoney(Dollar);
-        assertEquals(snackMachine.getMoneyInTransaction().getAmount(), 1.01f, 0);
+        assertEquals(snackMachine.getMoneyInTransaction(), 1.01f, 0);
     }
 
     @Test
@@ -48,7 +47,7 @@ public class SnackMachineTest {
         snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 10, 1));
         snackMachine.insertMoney(Dollar);
         snackMachine.buySnack(1);
-        assertEquals(snackMachine.getMoneyInTransaction(), Money.None);
+        assertEquals(snackMachine.getMoneyInTransaction(), Money.None.getAmount());
         assertEquals(snackMachine.getMoneyInside().getAmount(), 1, 0.5);
         assertEquals(snackMachine.getSnackPile(1).getQuantity(), 9);
     }
@@ -72,4 +71,41 @@ public class SnackMachineTest {
 
     }
 
+    @Test
+    public void snack_machine_returns_money_with_highest_denomination_first() {
+        SnackMachine snackMachine = new SnackMachine();
+        snackMachine.loadMoney(Dollar);
+        snackMachine.insertMoney(Quarter);
+        snackMachine.insertMoney(Quarter);
+        snackMachine.insertMoney(Quarter);
+        snackMachine.insertMoney(Quarter);
+        snackMachine.returnMoney();
+        assertEquals(snackMachine.getMoneyInside().getQuarterCount(), 4);
+        assertEquals(snackMachine.getMoneyInside().getOneDollarCount(), 0);
+    }
+
+    @Test
+    public void after_purchase_change_is_returned() {
+        SnackMachine snackMachine = new SnackMachine();
+        snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 1,
+                0.5f));
+        snackMachine.loadMoney(
+                new Money(0, 10, 0, 0, 0, 0)
+        );
+
+        snackMachine.insertMoney(Dollar);
+        snackMachine.buySnack(1);
+        assertEquals(snackMachine.getMoneyInside().getAmount(), 1.5, 0);
+        assertEquals(snackMachine.getMoneyInTransaction(), 0, 0);
+    }
+
+    @Test
+    public void cannot_buy_snack_if_not_enough_change() {
+        SnackMachine snackMachine = new SnackMachine();
+        snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 1, 0.5f));
+        snackMachine.insertMoney(Dollar);
+        assertThrows(IllegalStateException.class, () -> {
+            snackMachine.buySnack(1);
+        });
+    }
 }

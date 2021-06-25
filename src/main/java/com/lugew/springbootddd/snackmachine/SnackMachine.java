@@ -1,9 +1,6 @@
 package com.lugew.springbootddd.snackmachine;
 
-import com.lugew.springbootddd.AggregateRoot;
-import com.lugew.springbootddd.Slot;
-import com.lugew.springbootddd.SnackMachineDto;
-import com.lugew.springbootddd.SnackPile;
+import com.lugew.springbootddd.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,15 +16,17 @@ public final class SnackMachine extends AggregateRoot {
     @Getter
     @Setter
     private Money moneyInside;
+
+
     @Getter
     @Setter
-    private Money moneyInTransaction;
-
+    private float moneyInTransaction;
+    @Setter
     private List<Slot> slots;
 
     public SnackMachine() {
         moneyInside = None;
-        moneyInTransaction = None;
+        moneyInTransaction = 0;
         slots = new ArrayList<>();
         slots.add(new Slot(this, 1));
         slots.add(new Slot(this, 2));
@@ -49,30 +48,38 @@ public final class SnackMachine extends AggregateRoot {
                 Money.TwentyDollar};
         if (!Arrays.asList(coinsAndNotes).contains(money))
             throw new IllegalStateException();
-
-        moneyInTransaction = Money.add(moneyInTransaction, money);
-
+        moneyInTransaction = moneyInTransaction + money.getAmount();
+        moneyInside = moneyInside.add(money);
     }
 
     public void returnMoney() {
-        moneyInTransaction = None;
+        Money moneyToReturn = moneyInside.allocate(moneyInTransaction);
+        moneyInside = moneyInside.substract(moneyToReturn);
+        moneyInTransaction = 0;
     }
-
 
     public void buySnack(int position) {
         Slot slot = getSlot(position);
-        if (slot.getSnackPile().getPrice() > moneyInTransaction.getAmount()) {
+        if (slot.getSnackPile().getPrice() > moneyInTransaction) {
             throw new IllegalStateException();
         }
         slot.setSnackPile(slot.getSnackPile().subtractOne());
-        moneyInside = Money.add(moneyInside, moneyInTransaction);
-        moneyInTransaction = None;
+        Money change = moneyInside.allocate(moneyInTransaction - slot.getSnackPile().getPrice());
+        if (change.getAmount() < moneyInTransaction - slot.getSnackPile().getPrice()) {
+            throw new IllegalStateException();
+        }
+
+        moneyInside = moneyInside.substract(change);
+        moneyInTransaction = 0;
     }
 
     public SnackMachineDto convertToSnackMachineDto() {
         SnackMachineDto snackMachineDto = new SnackMachineDto();
         snackMachineDto.setId(id);
-        snackMachineDto.setMoneyInTransaction(moneyInTransaction.getAmount());
+        snackMachineDto.setMoneyInTransaction(moneyInTransaction);
+        List<SlotDto> slotDtoList = new ArrayList<>();
+        for (Slot slot : slots) slotDtoList.add(slot.convertToSlotDto());
+        snackMachineDto.setSlotDtoList(slotDtoList);
         snackMachineDto.setOneCentCount(moneyInside.getOneCentCount());
         snackMachineDto.setTenCentCount(moneyInside.getTenCentCount());
         snackMachineDto.setQuarterCount(moneyInside.getQuarterCount());
@@ -90,5 +97,7 @@ public final class SnackMachine extends AggregateRoot {
         }
     }
 
-
+    public void loadMoney(Money money) {
+        moneyInside = moneyInside.add(money);
+    }
 }

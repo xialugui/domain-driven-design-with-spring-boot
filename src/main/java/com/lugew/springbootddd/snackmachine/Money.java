@@ -26,6 +26,38 @@ public class Money extends ValueObject<Money> {
     private final int twentyDollarCount;
     private float amount;
 
+    public boolean canAllocate(float amount) {
+        Money money = allocateCore(amount);
+        return money.getAmount() == amount;
+    }
+
+    public Money allocate(float amount) {
+        if (!canAllocate(amount))
+            throw new IllegalStateException();
+        return allocateCore(amount);
+    }
+
+    private Money allocateCore(float amount) {
+        int twentyDollarCount = Math.min((int) (amount / 20), this.twentyDollarCount);
+        amount = amount - twentyDollarCount * 20;
+        int fiveDollarCount = Math.min((int) (amount / 5), this.fiveDollarCount);
+        amount = amount - fiveDollarCount * 5;
+        int oneDollarCount = Math.min((int) amount, this.oneDollarCount);
+        amount = amount - oneDollarCount;
+        int quarterCount = Math.min((int) (amount / 0.25f), this.quarterCount);
+        amount = amount - quarterCount * 0.25f;
+        int tenCentCount = Math.min((int) (amount / 0.1f), this.tenCentCount);
+        amount = amount - tenCentCount * 0.1f;
+        int oneCentCount = Math.min((int) (amount / 0.01f), this.oneCentCount);
+        return new Money(
+                oneCentCount,
+                tenCentCount,
+                quarterCount,
+                oneDollarCount,
+                fiveDollarCount,
+                twentyDollarCount);
+    }
+
     public float getAmount() {
         return oneCentCount * 0.01f + tenCentCount * 0.10f + quarterCount * 0.25f +
                 oneDollarCount * 1f
@@ -53,6 +85,7 @@ public class Money extends ValueObject<Money> {
         this.oneDollarCount = oneDollarCount;
         this.fiveDollarCount = fiveDollarCount;
         this.twentyDollarCount = twentyDollarCount;
+        this.amount = getAmount();
     }
 
     public Money(float amount, int oneCentCount, int tenCentCount, int quarterCount, int
@@ -83,6 +116,16 @@ public class Money extends ValueObject<Money> {
                 money1.oneDollarCount + money2.oneDollarCount,
                 money1.fiveDollarCount + money2.fiveDollarCount,
                 money1.twentyDollarCount + money2.twentyDollarCount);
+    }
+
+    public Money add(Money other) {
+        return new Money(
+                other.oneCentCount + this.oneCentCount,
+                other.tenCentCount + this.tenCentCount,
+                other.quarterCount + this.quarterCount,
+                other.oneDollarCount + this.oneDollarCount,
+                other.fiveDollarCount + this.fiveDollarCount,
+                other.twentyDollarCount + this.twentyDollarCount);
     }
 
     @Override

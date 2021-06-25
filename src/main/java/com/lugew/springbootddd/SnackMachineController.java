@@ -1,6 +1,5 @@
 package com.lugew.springbootddd;
 
-import com.lugew.springbootddd.snackmachine.Money;
 import com.lugew.springbootddd.snackmachine.SnackMachine;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -21,16 +20,6 @@ public class SnackMachineController {
     @ResponseBody
     public SnackMachineDto getSnackMachine(@PathVariable("id") long id) {
         return snackMachineRepository.findById(id).orElse(null);
-    }
-
-    @PutMapping("/{id}/{slotNumber}")
-    public void buySnack(@PathVariable("id") long id, @PathVariable("slotNumber")
-            int slotNumber) {
-        SnackMachineDto snackMachineDto =
-                snackMachineRepository.findById(id).orElse(null);
-        SnackMachine snackMachine = snackMachineDto.convertToSnackMachine();
-        snackMachine.buySnack(slotNumber);
-        snackMachineRepository.save(snackMachine.convertToSnackMachineDto());
     }
 
     @PutMapping("/{id}/moneyInTransaction/{coinOrNote}")
@@ -61,8 +50,15 @@ public class SnackMachineController {
         snackMachineRepository.save(snackMachine.convertToSnackMachineDto());
     }
 
-    public Money getWholeMoney(SnackMachine snackMachine) {
-        return Money.add(snackMachine.getMoneyInside(), snackMachine.getMoneyInTransaction());
+
+    @PutMapping("/{id}/{slotNumber}")
+    public void buySnack(@PathVariable("id") long id, @PathVariable("slotNumber")
+            int slotNumber) {
+        SnackMachineDto snackMachineDto =
+                snackMachineRepository.findById(id).orElse(null);
+        SnackMachine snackMachine = snackMachineDto.convertToSnackMachine();
+        snackMachine.buySnack(slotNumber);
+        snackMachineRepository.save(snackMachine.convertToSnackMachineDto());
     }
 
 }

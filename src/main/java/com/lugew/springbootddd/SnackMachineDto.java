@@ -6,8 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author 夏露桂
@@ -27,31 +28,23 @@ public class SnackMachineDto {
     private int fiveDollarCount;
     private int twentyDollarCount;
     private float moneyInTransaction;
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "snackMachineId")
+    private List<SlotDto> slotDtoList;
 
     public SnackMachine convertToSnackMachine() {
         SnackMachine snackMachine = new SnackMachine();
         snackMachine.setId(id);
-        snackMachine.setMoneyInTransaction(convertAmountToMoney());
+        snackMachine.setMoneyInTransaction(moneyInTransaction);
         snackMachine.setMoneyInside(new
-                Money(oneCentCount, tenCentCount, quarterCount, oneDollarCount, fiveDollarCount, twentyDollarCount));
+                Money(oneCentCount, tenCentCount, quarterCount,
+                oneDollarCount, fiveDollarCount, twentyDollarCount));
+        List<Slot> slotList = new ArrayList<>();
+        for (SlotDto slotDto : slotDtoList) {
+            slotList.add(slotDto.convertToSlot());
+        }
+        snackMachine.setSlots(slotList);
         return snackMachine;
     }
 
-    private Money convertAmountToMoney() {
-        float amount = this.moneyInTransaction;
-
-        int twentyDollarCount = (int) (amount / 20f);
-        amount %= 20f;
-        int fiveDollarCount = (int) (amount / 5f);
-        amount %= 5f;
-        int oneDollarCount = (int) (amount);
-        amount %= 1f;
-        int quarterCount = (int) (amount / 0.25f);
-        amount %= 0.25f;
-        int tenCentCount = (int) (amount / 0.10f);
-        amount %= 0.10f;
-        int oneCentCount = (int) (amount / 0.01f);
-
-        return new Money(this.moneyInTransaction, oneCentCount, tenCentCount, quarterCount, oneDollarCount, fiveDollarCount, twentyDollarCount);
-    }
 }
