@@ -27,12 +27,4 @@ public class Snack extends AggregateRoot {
         snackDto.setName(name);
         return snackDto;
     }
-
-    public Snack() {
-    }
-
-    public Snack(String name) {
-        this.name = name;
-    }
-
 }

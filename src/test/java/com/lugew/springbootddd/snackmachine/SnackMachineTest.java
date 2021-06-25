@@ -44,7 +44,7 @@ public class SnackMachineTest {
 
         SnackMachine snackMachine = new SnackMachine();
 
-        snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 10, 1));
+        snackMachine.loadSnacks(1, new SnackPile(Snack.Chocolate, 10, 1));
         snackMachine.insertMoney(Dollar);
         snackMachine.buySnack(1);
         assertEquals(snackMachine.getMoneyInTransaction(), Money.None.getAmount());
@@ -63,7 +63,7 @@ public class SnackMachineTest {
     @Test
     public void cannot_make_purchase_if_not_enough_money_inserted() {
         SnackMachine snackMachine = new SnackMachine();
-        snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 1, 2));
+        snackMachine.loadSnacks(1, new SnackPile(Snack.Chocolate, 1, 2));
         snackMachine.insertMoney(Dollar);
         assertThrows(IllegalStateException.class, () -> {
             snackMachine.buySnack(1);
@@ -87,7 +87,7 @@ public class SnackMachineTest {
     @Test
     public void after_purchase_change_is_returned() {
         SnackMachine snackMachine = new SnackMachine();
-        snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 1,
+        snackMachine.loadSnacks(1, new SnackPile(Snack.Chocolate, 1,
                 0.5f));
         snackMachine.loadMoney(
                 new Money(0, 10, 0, 0, 0, 0)
@@ -102,7 +102,7 @@ public class SnackMachineTest {
     @Test
     public void cannot_buy_snack_if_not_enough_change() {
         SnackMachine snackMachine = new SnackMachine();
-        snackMachine.loadSnacks(1, new SnackPile(new Snack("Some snack"), 1, 0.5f));
+        snackMachine.loadSnacks(1, new SnackPile(Snack.Chocolate, 1, 0.5f));
         snackMachine.insertMoney(Dollar);
         assertThrows(IllegalStateException.class, () -> {
             snackMachine.buySnack(1);
