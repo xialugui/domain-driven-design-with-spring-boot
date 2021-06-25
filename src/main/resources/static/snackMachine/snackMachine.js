@@ -1,10 +1,24 @@
-const rootURI = "http://localhost:23333/snackmachines/1";
+let searchParams = new URLSearchParams(window.location.search)
+let param = '';
+if (searchParams.has('id')) {
+    param = searchParams.get('id')
+} else {
+    param = '1';
+}
+
+const rootURI = "http://localhost:23333/snackmachines/" + param;
 getSnackMachine();
 
 function getSnackMachine() {
     $.get(rootURI, function (data, status) {
-        console.log(data)
+        console.log(data);
         $('#moneyInserted').html(data.moneyInTransaction);
+        $('#chocolatePrice').html(data.slotDtoList[0].price);
+        $('#sodaPrice').html(data.slotDtoList[1].price);
+        $('#gumPrice').html(data.slotDtoList[2].price);
+        $('#chocolateQuantity').html(data.slotDtoList[0].quantity);
+        $('#sodaQuantity').html(data.slotDtoList[1].quantity);
+        $('#gumQuantity').html(data.slotDtoList[2].quantity);
         $('#cent').html(data.oneCentCount);
         $('#tenCent').html(data.tenCentCount);
         $('#quarter').html(data.quarterCount);
@@ -37,20 +51,26 @@ $("button").click(function () {
         case "btnReturnMoney" :
             returnMoney()
             break;
-        case "btnBuy" :
+        case "btnBuyChocolate" :
             buy("1")
+            break;
+        case "btnBuySoda" :
+            buy("2")
+            break;
+        case "btnBuyGum" :
+            buy("3")
             break;
         default :
             break;
     }
 });
 
+
 function insert(coinOrNote) {
     $.ajax({
         url: rootURI + '/moneyInTransaction/' + coinOrNote,
         type: 'PUT',
         success: function (result) {
-// Do something with the result
         }
     });
     location.reload();
@@ -61,7 +81,6 @@ function returnMoney() {
         url: rootURI + '/moneyInTransaction',
         type: 'PUT',
         success: function (result) {
-// Do something with the result
         }
     });
     location.reload();

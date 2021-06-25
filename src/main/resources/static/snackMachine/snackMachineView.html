@@ -2,76 +2,80 @@
 <head><title>snackMachine</title></head>
 <body>
 <table style="width:100%">
-    <tbody>
+    <tr>
+        <td><span>Chocolate price:$<span id="chocolatePrice"></span></span>
+        </td>
+        <td><span>Soda price:$<span id="sodaPrice"></span></span></td>
+        <td><span>Gum price:$<span id="gumPrice"></span></span></td>
+    </tr>
+    <tr>
+        <td><span>Chocolate quantity:<span id="chocolateQuantity"></span>
+</span></td>
+        <td><span>Soda quantity:<span id="sodaQuantity"></span></span></td>
+        <td><span>Gum quantity:<span id="gumQuantity"></span></span></td>
+    </tr>
     <tr>
         <td>
-            <button id="btnBuy">Buy a Snack</button>
+            <button id="btnBuyChocolate">Buy a Chocolate</button>
+        </td>
+        <td>
+            <button id="btnBuySoda">Buy a Soda</button>
+        </td>
+        <td>
+            <button id="btnBuyGum">Buy a Gum</button>
         </td>
     </tr>
     <tr>
-    </tr>
-    </tbody>
 </table>
-<br>
-<br>
-<br>
-<span>Money inserted :$<span id="moneyInserted">0</span></span>
-<br>
+</br>
+</br>
+</br>
+<span>Money inserted :$<span id="moneyInserted"></span></span>
+</br>
 <table style="width:100%">
-    <tbody>
-    <tr>
-        <td>
-            <button id="btnInsertCent">Insert 1 cent coin</button>
-        </td>
-        <td>
-            <button id="btnInsertTenCent">Insert 10 cent coin</button>
-        </td>
-        <td>
-            <button id="btnInsertQuarter">Insert 25 cent coin</button>
-        </td>
     </tr>
-    <tr>
-        <td>
-            <button id="btnInsertDollar">Insert 1 dollar note</button>
-        </td>
-        <td>
-            <button id="btnInsertFiveDollar">Insert 5 dollar note</button>
-        </td>
-        <td>
-            <button id="btnInsertTwentyDollar">Insert 20 dollar
-                note
-            </button>
-        </td>
+    <td>
+        <button id="btnInsertCent">Insert 1 cent coin</button>
+    </td>
+    <td>
+        <button id="btnInsertTenCent">Insert 10 cent coin</button>
+    </td>
+    <td>
+        <button id="btnInsertQuarter">Insert 25 cent coin</button>
+    </td>
     </tr>
-    </tbody>
+    </tr>
+    <td>
+        <button id="btnInsertDollar">Insert 1 dollar note</button>
+    </td>
+    <td>
+        <button id="btnInsertFiveDollar">Insert 5 dollar note</button>
+    </td>
+    <td>
+        <button id="btnInsertTwentyDollar">Insert 20 dollar
+            note
+        </button>
+    </td>
+    </tr>
 </table>
-<br>
-<br>
-<br>
+</br>
+</br>
 <button id="btnReturnMoney">Return Money</button>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-Number of coins and Notes in SnackMachine
+</br>
+</br>
+</br>
+<div>No of coins and notes in Snack machine :</div>
 <table style="width:100%">
-    <tbody>
-    <tr>
-        <td>No. of 1 cent coin : <span id="cent">0</span></td>
-        <td>No. of 10 cent coin : <span id="tenCent">0</span></td>
-        <td>No. of 25 cent coin : <span id="quarter">0</span></td>
     </tr>
-    <tr>
-        <td>No. of 1 dollar note : <span id="dollar">0</span></td>
-        <td>No. of 5 dollar note : <span id="fiveDollar">0</span></td>
-        <td>No. of 20 dollar note : <span id="twentyDollar">0</span></td>
+    <td>No. of 1 cent coin : <span id="cent"></span></td>
+    <td>No. of 10 cent coin : <span id="tenCent"></span></td>
+    <td>No. of 25 cent coin : <span id="quarter"></span></td>
     </tr>
-    </tbody>
+    </tr>
+    <td>No. of 1 dollar note : <span id="dollar"></span></td>
+    <td>No. of 5 dollar note : <span id="fiveDollar"></span></td>
+    <td>No. of 20 dollar note : <span id="twentyDollar"></span></td>
+    </tr>
 </table>
 <script src="../common/jquery-3.6.0.min.js"></script>
 <script src="snackMachine.js"></script>

@@ -4,6 +4,9 @@ import com.lugew.springbootddd.snackmachine.SnackMachine;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.lugew.springbootddd.snackmachine.Money.*;
 
 /**
@@ -15,6 +18,14 @@ import static com.lugew.springbootddd.snackmachine.Money.*;
 @RequiredArgsConstructor
 public class SnackMachineController {
     private final SnackMachineRepository snackMachineRepository;
+
+    @GetMapping()
+    @ResponseBody
+    public List<SnackMachineDto> getSnackMachines() {
+        List<SnackMachineDto> list = new ArrayList<>();
+        snackMachineRepository.findAll().forEach(list::add);
+        return list;
+    }
 
     @GetMapping("/{id}")
     @ResponseBody
