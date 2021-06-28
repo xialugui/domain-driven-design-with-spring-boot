@@ -1,4 +1,4 @@
-package com.lugew.springbootddd;
+package com.lugew.springbootddd.common;
 
 /**
  * @author 夏露桂
@@ -35,7 +35,7 @@ public abstract class Entity {
         return id;
     }
 
-    protected void setId(long id) {
+    public void setId(long id) {
         this.id = id;
     }
 }

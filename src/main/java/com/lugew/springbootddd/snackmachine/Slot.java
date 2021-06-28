@@ -1,6 +1,6 @@
-package com.lugew.springbootddd;
+package com.lugew.springbootddd.snackmachine;
 
-import com.lugew.springbootddd.snackmachine.SnackMachine;
+import com.lugew.springbootddd.common.Entity;
 import lombok.Getter;
 import lombok.Setter;
 

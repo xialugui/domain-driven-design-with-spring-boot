@@ -1,7 +1,6 @@
-package com.lugew.springbootddd;
+package com.lugew.springbootddd.snackmachine;
 
-import com.lugew.springbootddd.snackmachine.Money;
-import com.lugew.springbootddd.snackmachine.SnackMachine;
+import com.lugew.springbootddd.sharedkernel.Money;
 import lombok.Getter;
 import lombok.Setter;
 

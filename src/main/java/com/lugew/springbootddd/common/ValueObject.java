@@ -1,4 +1,4 @@
-package com.lugew.springbootddd;
+package com.lugew.springbootddd.common;
 
 /**
  * @author 夏露桂
