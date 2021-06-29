@@ -12,3 +12,7 @@ insert into slot_dto
 values (1, 1, 0.5, 10, 1, 1),
        (2, 2, 1, 20, 2, 1),
        (3, 3, 2, 30, 3, 1);
+
+insert into ATM_DTO (money_charged, one_cent_count, one_dollar_count,
+                     quarter_count, ten_cent_count, five_dollar_count, twenty_dollar_count, id)
+values (2.5, 1, 1, 1, 1, 1, 1, 1);
