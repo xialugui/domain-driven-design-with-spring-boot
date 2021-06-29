@@ -47,4 +47,17 @@ public class Atm extends AggregateRoot {
         }
         return amount + commission;
     }
+
+    public AtmDto convertToAtmDto() {
+        AtmDto atmDto = new AtmDto();
+        atmDto.setId(id);
+        atmDto.setMoneyCharged(moneyCharged);
+        atmDto.setOneCentCount(moneyInside.getOneCentCount());
+        atmDto.setTenCentCount(moneyInside.getTenCentCount());
+        atmDto.setQuarterCount(moneyInside.getQuarterCount());
+        atmDto.setOneDollarCount(moneyInside.getOneDollarCount());
+        atmDto.setFiveDollarCount(moneyInside.getFiveDollarCount());
+        atmDto.setTwentyDollarCount(moneyInside.getTwentyDollarCount());
+        return atmDto;
+    }
 }
