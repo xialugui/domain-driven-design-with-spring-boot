@@ -1,4 +1,4 @@
-package com.lugew.springbootddd.common;
+package com.lugew.domaindrivendesignwithspringboot.common;
 
 import lombok.Getter;
 import lombok.Setter;
