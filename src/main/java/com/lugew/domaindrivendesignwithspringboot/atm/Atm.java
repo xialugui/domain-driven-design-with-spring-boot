@@ -27,6 +27,7 @@ public class Atm extends AggregateRoot {
         moneyInside = moneyInside.substract(output);
         float amountWithCommission = calculateAmountWithCommission(amount);
         moneyCharged += amountWithCommission;
+        addDomainEvent(new BalanceChangedEvent(null, amountWithCommission));
     }
 
     public String canTakeMoney(float amount) {
@@ -58,6 +59,7 @@ public class Atm extends AggregateRoot {
         atmDto.setOneDollarCount(moneyInside.getOneDollarCount());
         atmDto.setFiveDollarCount(moneyInside.getFiveDollarCount());
         atmDto.setTwentyDollarCount(moneyInside.getTwentyDollarCount());
+        atmDto.setDomainEvents(getDomainEvents());
         return atmDto;
     }
 }
