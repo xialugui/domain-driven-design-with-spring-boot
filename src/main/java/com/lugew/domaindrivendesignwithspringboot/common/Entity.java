@@ -1,4 +1,4 @@
-package com.lugew.springbootddd.common;
+package com.lugew.domaindrivendesignwithspringboot.common;
 
 /**
  * @author 夏露桂

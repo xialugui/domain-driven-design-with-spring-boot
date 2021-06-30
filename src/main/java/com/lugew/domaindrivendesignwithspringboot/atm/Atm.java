@@ -1,12 +1,12 @@
-package com.lugew.springbootddd.atm;
+package com.lugew.domaindrivendesignwithspringboot.atm;
 
 
-import com.lugew.springbootddd.common.AggregateRoot;
-import com.lugew.springbootddd.sharedkernel.Money;
+import com.lugew.domaindrivendesignwithspringboot.common.AggregateRoot;
+import com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money;
 import lombok.Getter;
 import lombok.Setter;
 
-import static com.lugew.springbootddd.sharedkernel.Money.None;
+import static com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money.None;
 
 @Getter
 @Setter

@@ -1,7 +1,7 @@
-package com.lugew.springbootddd.snackmachine;
+package com.lugew.domaindrivendesignwithspringboot.snackmachine;
 
-import com.lugew.springbootddd.common.AggregateRoot;
-import com.lugew.springbootddd.sharedkernel.Money;
+import com.lugew.domaindrivendesignwithspringboot.common.AggregateRoot;
+import com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.lugew.springbootddd.sharedkernel.Money.None;
+import static com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money.None;
 
 
 public final class SnackMachine extends AggregateRoot {

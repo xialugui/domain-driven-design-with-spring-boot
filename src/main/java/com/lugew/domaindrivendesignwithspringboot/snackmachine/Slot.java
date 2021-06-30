@@ -1,6 +1,6 @@
-package com.lugew.springbootddd.snackmachine;
+package com.lugew.domaindrivendesignwithspringboot.snackmachine;
 
-import com.lugew.springbootddd.common.Entity;
+import com.lugew.domaindrivendesignwithspringboot.common.Entity;
 import lombok.Getter;
 import lombok.Setter;
 

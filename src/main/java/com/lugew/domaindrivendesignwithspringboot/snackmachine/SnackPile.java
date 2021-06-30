@@ -1,6 +1,6 @@
-package com.lugew.springbootddd.snackmachine;
+package com.lugew.domaindrivendesignwithspringboot.snackmachine;
 
-import com.lugew.springbootddd.common.ValueObject;
+import com.lugew.domaindrivendesignwithspringboot.common.ValueObject;
 import lombok.Getter;
 
 /**

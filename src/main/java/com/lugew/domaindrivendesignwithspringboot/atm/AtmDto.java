@@ -1,6 +1,6 @@
-package com.lugew.springbootddd.atm;
+package com.lugew.domaindrivendesignwithspringboot.atm;
 
-import com.lugew.springbootddd.sharedkernel.Money;
+import com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money;
 import lombok.Getter;
 import lombok.Setter;
 

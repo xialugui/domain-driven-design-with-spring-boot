@@ -1,9 +1,9 @@
-package com.lugew.springbootddd.snackmachine;
+package com.lugew.domaindrivendesignwithspringboot.snackmachine;
 
-import com.lugew.springbootddd.sharedkernel.Money;
+import com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money;
 import org.junit.jupiter.api.Test;
 
-import static com.lugew.springbootddd.sharedkernel.Money.*;
+import static com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 

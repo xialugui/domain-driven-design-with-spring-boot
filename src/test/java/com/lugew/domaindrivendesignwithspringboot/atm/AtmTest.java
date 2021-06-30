@@ -1,9 +1,9 @@
-package com.lugew.springbootddd.atm;
+package com.lugew.domaindrivendesignwithspringboot.atm;
 
 
 import org.junit.jupiter.api.Test;
 
-import static com.lugew.springbootddd.sharedkernel.Money.*;
+import static com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AtmTest {

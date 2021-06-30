@@ -1,6 +1,6 @@
-package com.lugew.springbootddd.snackmachine;
+package com.lugew.domaindrivendesignwithspringboot.snackmachine;
 
-import com.lugew.springbootddd.common.AggregateRoot;
+import com.lugew.domaindrivendesignwithspringboot.common.AggregateRoot;
 import lombok.Getter;
 import lombok.Setter;
 

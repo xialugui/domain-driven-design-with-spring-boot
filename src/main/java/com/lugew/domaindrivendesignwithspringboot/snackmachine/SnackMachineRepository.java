@@ -1,4 +1,4 @@
-package com.lugew.springbootddd.snackmachine;
+package com.lugew.domaindrivendesignwithspringboot.snackmachine;
 
 import org.springframework.data.repository.CrudRepository;
 

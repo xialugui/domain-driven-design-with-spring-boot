@@ -1,6 +1,6 @@
-package com.lugew.springbootddd.sharedkernel;
+package com.lugew.domaindrivendesignwithspringboot.sharedkernel;
 
-import com.lugew.springbootddd.common.ValueObject;
+import com.lugew.domaindrivendesignwithspringboot.common.ValueObject;
 import lombok.Getter;
 
 /**

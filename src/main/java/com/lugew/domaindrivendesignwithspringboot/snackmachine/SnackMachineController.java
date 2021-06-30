@@ -1,4 +1,4 @@
-package com.lugew.springbootddd.snackmachine;
+package com.lugew.domaindrivendesignwithspringboot.snackmachine;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.lugew.springbootddd.sharedkernel.Money.*;
+import static com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money.*;
 
 /**
  * @author 夏露桂

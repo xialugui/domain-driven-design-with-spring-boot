@@ -1,13 +1,12 @@
-package com.lugew.springbootddd;
+package com.lugew.domaindrivendesignwithspringboot;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SpringBootDddApplication {
-
+public class DomainDrivenDesignWithSpringBootApplication {
     public static void main(String[] args) {
-        SpringApplication.run(SpringBootDddApplication.class, args);
+        SpringApplication.run(DomainDrivenDesignWithSpringBootApplication.class, args);
     }
 
 }

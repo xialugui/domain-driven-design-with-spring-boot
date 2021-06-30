@@ -1,4 +1,4 @@
-package com.lugew.springbootddd.atm;
+package com.lugew.domaindrivendesignwithspringboot.atm;
 
 import org.springframework.data.repository.CrudRepository;
 
