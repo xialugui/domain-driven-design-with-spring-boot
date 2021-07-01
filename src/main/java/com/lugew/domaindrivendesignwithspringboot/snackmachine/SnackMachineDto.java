@@ -4,7 +4,6 @@ import com.lugew.domaindrivendesignwithspringboot.sharedkernel.Money;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +29,12 @@ public class SnackMachineDto {
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "snackMachineId")
     private List<SlotDto> slotDtoList;
+
+    public float getAmount() {
+        return oneCentCount * 0.01f + tenCentCount * 0.10f + quarterCount * 0.25f +
+                oneDollarCount * 1f
+                + fiveDollarCount * 5f + twentyDollarCount * 20f;
+    }
 
     public SnackMachine convertToSnackMachine() {
         SnackMachine snackMachine = new SnackMachine();

@@ -1,0 +1,70 @@
+<html>
+<body>
+<div>
+    Balance : $<span id="balance"></span>
+</div>
+<div>
+    Cash : $<span id="cash"></span>
+</div>
+</br>
+<table style="width: 100%" border="1">
+    <tr>
+        <th>Snack machines</th>
+        <th>ATMs</th>
+    </tr>
+    <tr>
+        <td>
+            212
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        <ul id="snackMachineList" type="none">
+                            <li>
+                                <span>Id</span>&nbsp&nbsp<span>Money</span></li>
+                        </ul>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table style="width: 100%">
+                <tr>
+                    <td>
+                        <ul id="atmList" type="none">
+                            <li>
+                                <span>Id</span>&nbsp&nbsp<span>Cash</span></li>
+                        </ul>
+                    </td>
+                </tr>
+                <!-- <tr>
+                <td>Id</td>
+                <td>Cash</td>
+                </tr>
+                <tr>
+                <td id="atmId">1</td>
+                <td id="cash">$4</td>
+                <td><a href="../atm/AtmView.html">Show</a></td>
+                <td><button id="btnLoad">
+                Load cash
+                </buton></td>
+                </tr> -->
+            </table>
+        </td>
+    </tr>
+</table>
+</br>
+</br>
+</br>
+<div>Move cash from Snack machine to Head office :</div>
+<input type="text" id="snackmachineId" placeholder="Enter SnackMachine Id"/>
+<button id="btnUnload">Unload</button>
+</br>
+</br>
+</br>
+<div>Move cash from Head office to Atm :</div>
+<input type="text" id="atmId" placeholder="Enter Atm Id"/>
+<button id="btnLoad">Load</button>
+<script src="../common/jquery-3.6.0.min.js"></script>
+<script src="headOffice.js"></script>
+</body>
+</html>

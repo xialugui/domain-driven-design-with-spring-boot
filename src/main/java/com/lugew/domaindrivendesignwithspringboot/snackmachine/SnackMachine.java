@@ -34,6 +34,15 @@ public final class SnackMachine extends AggregateRoot {
         slots.add(new Slot(this, 3));
     }
 
+    public Money unloadMoney() {
+        if (moneyInTransaction > 0)
+            throw new IllegalStateException();
+        Money money = moneyInside;
+        moneyInside = Money.None;
+        return money;
+    }
+
+
     public Slot getSlot(int position) {
         return slots.stream().filter(x -> x.getPosition() ==
                 position).findAny().orElse(null);
