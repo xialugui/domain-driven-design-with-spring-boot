@@ -5,6 +5,11 @@
 [![star](https://gitee.com/xialugui/domain-driven-design-with-spring-boot/badge/star.svg?theme=dark)](https://gitee.com/xialugui/domain-driven-design-with-spring-boot)
 [![fork](https://gitee.com/xialugui/domain-driven-design-with-spring-boot/badge/fork.svg?theme=dark)](https://gitee.com/xialugui/domain-driven-design-with-spring-boot)
 
+# 领域驱动设计实现
+
+另一个项目[领域驱动设计实现][implementing-ddd]
+是书籍《领域驱动设计实现》的全面实战和理论分析，感兴趣的朋友可以参考。
+
 # 食用方式
 
 本项目是书籍《Domain Driven Design with Spring Boot》的源码，此书暂时只有 英文版，本人将其翻译为中文，且将源码重新整理。源码也是我个人学习此书时的实践，为了
@@ -22,3 +27,5 @@
 对应分支包含发行版本：
 ![img_2.png](image/img_2.png)
 大家可根据学习进度切换分支。
+
+[implementing-ddd]: https://gitee.com/xialugui/domain-driven-design
