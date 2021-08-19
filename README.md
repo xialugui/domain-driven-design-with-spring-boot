@@ -28,4 +28,4 @@
 ![img_2.png](image/img_2.png)
 大家可根据学习进度切换分支。
 
-[implementing-ddd]: https://gitee.com/xialugui/domain-driven-design
+[implementing-ddd]: https://gitee.com/xialugui/implementing-domain-driven-design
